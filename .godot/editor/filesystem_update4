@@ -1,2 +1,8 @@
 res://main.tscn
 res://player.tscn
+res://ai_controller.gd
+res://player.gd
+res://hud.gd
+res://main.gd
+res://mob.gd
+res://mob.tscn

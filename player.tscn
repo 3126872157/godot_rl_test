@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://1pcalgdqmi5g"]
+[gd_scene load_steps=10 format=3 uid="uid://1pcalgdqmi5g"]
 
 [ext_resource type="Texture2D" uid="uid://b4yyoafu8bi0q" path="res://art/playerGrey_up1.png" id="1_ggxgb"]
 [ext_resource type="Script" path="res://player.gd" id="1_xlgch"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ftkxr8r4qghp" path="res://art/playerGrey_walk1.png" id="3_4o1v2"]
 [ext_resource type="Texture2D" uid="uid://couyhcegeihme" path="res://art/playerGrey_walk2.png" id="4_4ehm1"]
 [ext_resource type="Script" path="res://addons/godot_rl_agents/sensors/sensors_2d/RaycastSensor2D.gd" id="6_rmyc2"]
+[ext_resource type="Script" path="res://ai_controller.gd" id="7_xxglh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eqwrv"]
 animations = [{
@@ -52,5 +53,8 @@ metadata/_edit_group_ = true
 
 [node name="RaycastSensor2D" type="Node2D" parent="."]
 script = ExtResource("6_rmyc2")
+
+[node name="AIController2D" type="Node2D" parent="."]
+script = ExtResource("7_xxglh")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
