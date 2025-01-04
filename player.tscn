@@ -53,6 +53,7 @@ metadata/_edit_group_ = true
 
 [node name="RaycastSensor2D" type="Node2D" parent="."]
 script = ExtResource("6_rmyc2")
+ray_length = 300
 
 [node name="AIController2D" type="Node2D" parent="."]
 script = ExtResource("7_xxglh")

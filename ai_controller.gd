@@ -1,17 +1,26 @@
 extends AIController2D
 
-var move_action :int = 0
+var move_action = Vector2.ZERO
+var screen_width
+var screen_height
 
 func _ready():
+	screen_width = get_viewport().size.x
+	screen_height = get_viewport().size.y
 	reset()
 	
 #需要reset()的情况
+func _physics_process(delta: float) -> void:
+	pass
 
-func get_obs() -> Dictionary:
-	# get the balls position and velocity in the paddle's frame of reference
-	var ball_pos = to_local(_player.ball.global_position)
-	var ball_vel = to_local(_player.ball.linear_velocity)
-	var obs = [ball_pos.x, ball_pos.z, ball_vel.x/10.0, ball_vel.z/10.0]
+func get_obs():
+	#获取射线探测器返回的数组
+	var obs = _player.raycast_sensor.get_observation()
+	
+	# 获取玩家位置并归一化
+	var player_pos = _player.position
+	obs.append(player_pos.x / screen_width)
+	obs.append(player_pos.y / screen_height)
 
 	return {"obs":obs}
 
@@ -20,11 +29,12 @@ func get_reward() -> float:
 
 func get_action_space() -> Dictionary:
 	return {
-		"move_action" : {
-			"size": 4,
-			"action_type": "discrete"
+		"move" : {
+			"size": 2,
+			"action_type": "continuous"
 		},
 		}
 
 func set_action(action) -> void:
-	move_action = action["move_action"]
+	move_action.x = action["move"][0]
+	move_action.y = action["move"][1]
